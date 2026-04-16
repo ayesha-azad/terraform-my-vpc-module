@@ -55,11 +55,13 @@ module "vpc" {
   subnet-config = {
     "public-subnet-1" = {
       cidr_block = "10.0.1.0/24"
+      name       = "public-subnet-1"
       az         = "eu-north-1a"
       public     = true
     }
     "private-subnet-1" = {
       cidr_block = "10.0.2.0/24"
+      name       = "private-subnet-1"
       az         = "eu-north-1b"
       public     = false
     }
