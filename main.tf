@@ -1,3 +1,7 @@
+provider "aws" {
+  region = ""
+}
+
 resource "aws_vpc" "my-vpc" {
   cidr_block = var.vpc-config.cidr_block
 

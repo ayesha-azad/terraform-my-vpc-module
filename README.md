@@ -20,7 +20,26 @@ This module creates a complete VPC setup including:
 
 ## Provider
 
-- **AWS Region**: `eu-north-1` (configured in the module)
+The module requires the AWS provider to be configured. The provider block in the module does not have a default region set, so you must configure it in your root module or using environment variables.
+
+**Configuration Methods:**
+
+1. **In your root module:**
+```hcl
+provider "aws" {
+  region = "eu-north-1"  # Change to your desired region
+}
+```
+
+2. **Via environment variable:**
+```bash
+export AWS_REGION=eu-north-1
+```
+
+3. **Via AWS CLI configuration:**
+Configure your AWS CLI with the desired default region.
+
+**Supported Regions:** Any AWS region is supported. The examples use `eu-north-1`, but you can use any region available in your AWS account (e.g., `us-east-1`, `us-west-2`, `eu-west-1`, etc.).
 
 ## Usage
 
@@ -73,10 +92,12 @@ vpc-config = {
 **Required:** `true`
 
 Map of subnet configurations where the key is the subnet name and value contains:
-- `cidr_block` (string, required): CIDR block for the subnet. Must be a valid CIDR notation.
-- `name` (string, required): Name tag for the subnet.
-- `az` (string, required): Availability zone for the subnet (e.g., `eu-north-1a`).
+- `cidr_block` (string, **required**): CIDR block for the subnet. Must be a valid CIDR notation.
+- `name` (string, **required**): Name tag for the subnet.
+- `az` (string, **required**): Availability zone for the subnet (e.g., `eu-north-1a`).
 - `public` (bool, optional): Set to `true` for public subnets, `false` for private. Defaults to `false`.
+
+**Mandatory Fields:** `cidr_block`, `name`, and `az` must be provided for each subnet.
 
 **Validation:** All CIDR blocks must be valid CIDR notation.
 
